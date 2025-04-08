@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Tickets</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/image6.jfif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .marquee-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            background-color: rgba(30, 37, 48, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #e2e8f0;
+            flex-grow: 1;
+        }
+
+        th, td {
+            border: 1px solid #4a5568;
+            padding: 12px 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #374151;
+            font-weight: 600;
+        }
+
+        .table tbody tr:hover {
+            background-color: #3f4a5c;
+            cursor: pointer;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            color: #cbd5e0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+
+
+        .back-button {
+            background: linear-gradient(to right, #3498db, #2980b9); /* Blue gradient */
+            border: none;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #2980b9, #3498db); /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="marquee-container">
+    <marquee behavior="scroll" direction="left" scrollamount="6">
+        View All Support Tickets Here - Detailed information about each ticket.
+    </marquee>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>User ID</th>
+            <th>Issue Description</th>
+            <th>Ticket Status</th>
+            <th>Created Date</th>
+            <th>Resolved Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.ticketId}"></td>
+            <td th:text="${ticket.userId}"></td>
+            <td th:text="${ticket.issueDescription}"></td>
+            <td th:text="${ticket.ticketStatus}"></td>
+            <td th:text="${#dates.format(ticket.createdDate, 'yyyy-MM-dd ')}"></td>
+            <td th:text="${ticket.resolvedDate != null ? #dates.format(ticket.resolvedDate, 'yyyy-MM-dd ') : '-'}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<a href="/support/" class="back-button">Back to Support Home</a>
+</body>
+</html>

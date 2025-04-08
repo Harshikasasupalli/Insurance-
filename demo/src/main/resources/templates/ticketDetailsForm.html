@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/image6.jfif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .marquee-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: rgba(45, 55, 72, 0.7); /* Darker, slightly transparent background */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-left: 20px;
+            margin-bottom: 30px;
+            max-width: 500px;
+            width: 90%;
+            align-self: flex-start;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #cbd5e0;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #4a5568;
+            border-radius: 5px;
+            background-color: #1a202c;
+            color: #e2e8f0;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.2);
+        }
+
+        .btn-primary, .btn-secondary {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            border: none;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #2980b9, #3498db);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, #7f8c8d, #6c757d);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #6c757d, #7f8c8d);
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ecf0f1;
+        }
+
+        h1 {
+            color: #cbd5e0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 1.1rem;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="marquee-container">
+    <marquee behavior="scroll" direction="left" scrollamount="6">
+        Enter the Ticket ID to view the ticket details.
+    </marquee>
+</div>
+
+<div class="form-container">
+    <form th:action="@{/support/ticketDetails}" method="post">
+        <div class="form-group">
+            <label for="id">Ticket ID</label>
+            <input type="number" class="form-control" id="id" name="id" required>
+        </div>
+        <div class="button-row">
+            <button type="submit" class="btn btn-primary">Get Ticket Details</button>
+            <a href="/support/" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+    <div th:if="${error}" class="alert alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+</div>
+</body>
+</html>
