@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/images/image6.jfif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+        }
+
+        .details-container {
+            background-color: rgba(30, 37, 48, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            margin: 50px auto 20px; /* Added margin-bottom for space */
+            max-width: 600px;
+        }
+
+        .table {
+            margin-top: 20px;
+            color: #ecf0f1;
+        }
+
+        th, td {
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+        }
+
+        th {
+            font-weight: 600;
+        }
+
+        <!--        .header {-->
+                    <!--            display: flex;-->
+                    <!--            justify-content: left;-->
+                    <!--            align-items: center;-->
+                    <!--            padding: 20px;-->
+                    <!--        }-->
+
+        .back-link {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 1.1rem;
+        }
+
+        .alert {
+            margin-top: 20px;
+            color: #ecf0f1;
+        }
+
+        .alert-success {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid #2ecc71;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background:  linear-gradient(to right, #3498db, #2980b9);;
+            border: none;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #6c757d, #7f8c8d);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!--    <div class="header">-->
+    <!--        <a href="/support/" class="back-link">Home</a>-->
+    <!--    </div>-->
+    <div class="details-container">
+        <table class="table table-bordered">
+            <tr>
+                <th>Ticket ID</th>
+                <td th:text="${ticket.ticketId}"></td>
+            </tr>
+            <tr>
+                <th>User ID</th>
+                <td th:text="${ticket.userId}"></td>
+            </tr>
+            <tr>
+                <th>Issue Description</th>
+                <td th:text="${ticket.issueDescription}"></td>
+            </tr>
+            <tr>
+                <th>Ticket Status</th>
+                <td th:text="${ticket.ticketStatus}"></td>
+            </tr>
+            <tr>
+                <th>Created Date</th>
+                <td th:text="${#dates.format(ticket.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            <tr th:if="${ticket.resolvedDate != null}">
+                <th>Resolved Date</th>
+                <td th:text="${#dates.format(ticket.resolvedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+        </table>
+        <div th:if="${message}" class="alert alert-success">
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <div class="button-row">
+        <a href="/support/" class="btn btn-secondary">Back to Support Home</a>
+    </div>
+</div>
+</body>
+</html>
